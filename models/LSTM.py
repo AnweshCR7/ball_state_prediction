@@ -1,5 +1,5 @@
 from keras.models import Sequential
-from keras.layers import Dense, Input, LSTM, Dropout
+from keras.layers import Dense, Input, LSTM, Dropout, Softmax
 from keras.models import Model
 
 
@@ -10,6 +10,7 @@ def initialize_lstm(input_shape, layer_sizes, hidden_act_func='tanh', o_act_func
 
     lstm_layer = LSTM(layer_sizes, activation=hidden_act_func, return_sequences=False)(data_input)
     dense = Dense(1, activation=o_act_func)(lstm_layer)
+    output = Softmax(axis=-1)(dense)
     # model = Sequential()
     # # model.add(Input(shape=(5, 100)))
     # model.add(LSTM(8, input_shape=(len(X_train), n_features)))
@@ -17,7 +18,7 @@ def initialize_lstm(input_shape, layer_sizes, hidden_act_func='tanh', o_act_func
     # model.add(Dense(1, activation='sigmoid'))
     # model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
-    model = Model(inputs=data_input, outputs=dense)
+    model = Model(inputs=data_input, outputs=output)
     print(model.summary())
 
     return model
