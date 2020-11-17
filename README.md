@@ -1,4 +1,7 @@
-## Assignment
+## Problem Statement
+In a football match, match simulations are based on single-point positional tracking data of players and the ball. However, in such match data-sets, often times, we do not have the entire data (i.e. there are missing data points) and then we have to make the necessary additions ourselves. One such question is whether the ball is in play or not (active or dead ball). This so-called ball-state is used by us as an input for the automatic direction of football matches. The data is from  a TRACAB dataset (not included in the repository).
+
+The aim is to set up a sequential model that predicts the ball state (Dead / Alive) for each frame based on the player and ball position data. For this a "delay" of 100 frames is built in. This means that the player and ball positions from all previous frames, and from the 100 following frames may be used as input data.
 
 ### Proposed solution
 Used an LSTM network to train a classifier to classify the ball_state as alive 
